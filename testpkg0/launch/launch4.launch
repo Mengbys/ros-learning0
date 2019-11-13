@@ -1,0 +1,22 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch" >
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+	</include>
+	
+	<param name="robot_ball_description" textfile="$(find testpkg0)/urdf/lab8/ball.urdf" />
+	<param name="robot_description" textfile="$(find testpkg0)/urdf/lab8/body.urdf" />
+	
+	<group ns = "ns0">
+		<node pkg="gazebo_ros" type="spawn_model" name="gazebo_spawn"
+			args="-file $(find testpkg0)/urdf/lab8/ball.urdf -urdf -x 3 -y 0 -z 3 -model ball"/>
+		<node pkg = "testpkg0" type = "node1" name = "node1"/>
+	</group>
+	
+	<group ns = "ns1">
+		<node pkg="gazebo_ros" type="spawn_model" name="gazebo_spawn"
+			args="-file $(find testpkg0)/urdf/lab8/body.urdf -urdf -x 0 -y 0 -z 0 -model body"/>
+		<node pkg = "testpkg0" type = "node4" name = "node4"/>
+	</group>
+	
+</launch>
