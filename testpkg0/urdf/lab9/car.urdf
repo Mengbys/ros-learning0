@@ -119,25 +119,25 @@ izz="5.0" />
 </inertial> 
 </link>
 
-<joint name="base_to_left_wheel0" type="continuous">
+<joint name="base_to_left_wheel0" type="fixed">
 <parent link="base_link"/>
 <child link="left_wheel0"/>
 <origin rpy="1.5708 0 0" xyz="0.2 0.14 -0.05"/>  
 </joint>
 
-<joint name="base_to_right_wheel0" type="continuous">
+<joint name="base_to_right_wheel0" type="fixed">
 <parent link="base_link"/>
 <child link="right_wheel0"/>
 <origin rpy="1.5708 0 0" xyz="0.2 -0.20 -0.05"/>
 </joint>
 
-<joint name="base_to_left_wheel1" type="continuous">
+<joint name="base_to_left_wheel1" type="fixed">
 <parent link="base_link"/>
 <child link="left_wheel1"/>
 <origin rpy="1.5708 0 0" xyz="-0.2 0.14 -0.05"/>  
 </joint>
 
-<joint name="base_to_right_wheel1" type="continuous">
+<joint name="base_to_right_wheel1" type="fixed">
 <parent link="base_link"/>
 <child link="right_wheel1"/>
 <origin rpy="1.5708 0 0" xyz="-0.2 -0.20 -0.05"/>
@@ -153,7 +153,9 @@ izz="5.0" />
 <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">  
 <commandTopic>cmd_vel</commandTopic>
 <odometryTopic>/odom</odometryTopic>
-<odometryFrame>/map</odometryFrame>
+
+<odometryFrame>/odom</odometryFrame>
+
 <odometryRate>20.0</odometryRate>
 <robotBaseFrame>base_link</robotBaseFrame>
 </plugin>
