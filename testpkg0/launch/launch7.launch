@@ -1,0 +1,34 @@
+<launch>
+	<include file="$(find gazebo_ros)/launch/empty_world.launch" >
+		<arg name = "world_name" value = "$(find testpkg0)/world/world1.world"/>
+		<arg name="use_sim_time" value="true"/>
+		<arg name="gui" value="true"/>
+	</include>
+	
+	<node pkg="gazebo_ros" type="spawn_model" name="gazebo_spawn"
+		args="-file $(find testpkg0)/urdf/lab9/car.urdf -urdf -x 7 -y 4 -z 0 -Y 3.14 -model CAR0">
+	</node>
+	
+    <node pkg="map_server" type="map_server" args="$(find testpkg0)/maps/mymap.yaml" name="map_server"/> 
+    <node pkg="amcl" type="amcl" name="amcl"/>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen"> 
+        <rosparam file="$(find testpkg0)/param/move_base_params.yaml" command="load" /> 
+        <rosparam file="$(find testpkg0)/param/global_costmap_params.yaml" 
+        command="load" ns="global_costmap"/> 
+        <rosparam file="$(find testpkg0)/param/local_costmap_params.yaml" 
+        command="load" ns="local_costmap"/> 
+        <rosparam file="$(find testpkg0)/param/global_planner_params.yaml" 
+        command="load" ns="GlobalPlanner"/> 
+        <rosparam file="$(find testpkg0)/param/dwa_local_planner_params.yaml"
+        command="load" ns="DWAPlannerROS"/> 
+    </node>
+
+	<node pkg = "testpkg0" type = "car_laser_node" name = "car_laser_node"/>
+	
+	<param name="robot_description" textfile="$(find testpkg0)/urdf/lab9/car.urdf" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find testpkg0)/urdf/rviz.rviz" />
+	<node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "state_publisher"/>
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+</launch>
+
