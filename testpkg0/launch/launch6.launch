@@ -1,12 +1,12 @@
 <launch>
 	<include file="$(find gazebo_ros)/launch/empty_world.launch" >
-		<arg name = "world_name" value = "$(find testpkg0)/world/world1.world"/>
+		<arg name = "world_name" value = "$(find testpkg0)/world/world2.world"/>
 		<arg name="use_sim_time" value="true"/>
 		<arg name="gui" value="false"/>
 	</include>
 	
 	<node pkg="gazebo_ros" type="spawn_model" name="gazebo_spawn"
-		args="-file $(find testpkg0)/urdf/lab9/car.urdf -urdf -x 7 -y 4 -z 0 -Y 3.14 -model CAR0">
+		args="-file $(find testpkg0)/urdf/lab9/car.urdf -urdf -x -0.5 -y 5.5 -z 0 -Y 4.84 -model CAR0">
 	</node>
 	
 	<node pkg="gmapping" type="slam_gmapping" name="slam"/>

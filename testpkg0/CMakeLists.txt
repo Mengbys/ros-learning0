@@ -14,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   urdf
   laser_geometry
+  actionlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -162,6 +163,8 @@ target_link_libraries(car_laser_node ${catkin_LIBRARIES})
 add_executable(car_ctl_node src/car_ctl_points.cpp)
 target_link_libraries(car_ctl_node ${catkin_LIBRARIES})
 
+add_executable(move_base_ctl_node src/move_base_ctl.cpp)
+target_link_libraries(move_base_ctl_node ${catkin_LIBRARIES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
